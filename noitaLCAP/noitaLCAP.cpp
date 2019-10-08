@@ -61,12 +61,13 @@ int main()
 		{"fungi", "Fungus (mat_fungus)"}
 	};
 	int seed;
-
+	bool stateF5 = false;
+	bool stateF4 = false;
 
 	//program runs until END key is pressed
 	while (!(GetAsyncKeyState(VK_F12) & 0x0001)){
 		//does shit when HOME key is pressed
-		if(GetAsyncKeyState(VK_F4) & 0x0001)
+		if((stateF4 = GetAsyncKeyState(VK_F4) & 0x0001) || (stateF5 = GetAsyncKeyState(VK_F5) & 0x0001))
 		{
 			//gets the active window's title and then uses that to get PID (too lazy to do it other way)
 			//have noita active when pressing it
@@ -74,13 +75,15 @@ int main()
 			GetWindowThreadProcessId(hWnd, &noitaPID);
 
 
-
-
+			HANDLE pHandle = OpenProcess(PROCESS_VM_READ, FALSE, noitaPID);
+			if(stateF4)
+				ReadProcessMemory(pHandle, (LPVOID)noitaSeed, &seed, sizeof(seed), 0);
+			else if(stateF5)
+				ReadProcessMemory(pHandle, (LPVOID)noitaSeedBeta, &seed, sizeof(seed), 0);
 
 
 			//reads seed and stores it in the seed variable
-			HANDLE pHandle = OpenProcess(PROCESS_VM_READ, FALSE, noitaPID);
-			ReadProcessMemory(pHandle, (LPVOID)noitaSeed, &seed, sizeof(seed), 0);
+			
 			
 			//send this to super secret server uwu
 			string cmd = "curl -s --get \"http://94.172.33.134:4921/noita?" + to_string(seed) + "&hey_you_reading_this_you_will_find_literally_nothing_and_just_waste_your_time\"";
@@ -178,8 +181,4 @@ int main()
 
 	}
 	return 0;
-}
-
-void ok() {
-
 }
