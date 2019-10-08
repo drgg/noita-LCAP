@@ -163,7 +163,7 @@ int main()
 			end.append(mat.find(token6)->second);
 			end.append("\n\n");
 
-			MessageBoxA(NULL, end.c_str(), "LCAP", MB_OK);
+			MessageBoxA(NULL, end.c_str(), "LCAP", MB_OK | MB_TOPMOST);
 		}
 	}
 	return 0;
