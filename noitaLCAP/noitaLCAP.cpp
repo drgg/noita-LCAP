@@ -11,7 +11,9 @@ using namespace std;
 
 
 DWORD noitaPID;
-DWORD noitaSeed = 0x177712C;
+DWORD noitaSeed = 0x177712C;  //main branch
+DWORD noitaSeedBeta = 0x14A5CA0;  //beta branch
+
 
 
 int main()
@@ -70,6 +72,11 @@ int main()
 			//have noita active when pressing it
 			HWND hWnd = GetForegroundWindow();
 			GetWindowThreadProcessId(hWnd, &noitaPID);
+
+
+
+
+
 
 			//reads seed and stores it in the seed variable
 			HANDLE pHandle = OpenProcess(PROCESS_VM_READ, FALSE, noitaPID);
@@ -138,7 +145,7 @@ int main()
 				token = token6.substr(0, pos);
 				token6 = token;
 			}
-
+			cout << endl << endl << seed << endl;
 			cout << "LC:" << endl;
 			cout << mat.find(token1)->second << endl;
 			cout << mat.find(token2)->second << endl;
@@ -163,8 +170,16 @@ int main()
 			end.append(mat.find(token6)->second);
 			end.append("\n\n");
 
-			MessageBoxA(NULL, end.c_str(), "LCAP", MB_OK | MB_SYSTEMMODAL);
+			string x = to_string(seed);
+			const char* fuck2 = x.c_str();
+			MessageBoxA(NULL, end.c_str(), fuck2, MB_OK | MB_SYSTEMMODAL);
 		}
+
+
 	}
 	return 0;
+}
+
+void ok() {
+
 }
