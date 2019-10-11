@@ -11,8 +11,8 @@ using namespace std;
 
 
 DWORD noitaPID;
-DWORD noitaSeed = 0x177712C;  //main branch
-DWORD noitaSeedBeta = 0x14A5CA0;  //beta branch
+DWORD noitaSeed = 0x1420798;  //main branch + beta branch
+DWORD noitaSeedBeta = 0x01429880;  //mod branch
 
 
 
